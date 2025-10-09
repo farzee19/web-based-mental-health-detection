@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Mental Health Test</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="static/about.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+<!-- Navbar (sit on top) -->
+<div class="w3-top">
+  <div class="w3-bar w3-white w3-card" id="myNavbar">
+    <a href="/" class="w3-bar-item w3-button w3-wide">HOME</a>
+    <!-- Hide right-floated links on small screens and replace them with a menu icon -->
+    <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="w3_open()">
+      <i class="fa fa-bars"></i>
+    </a>
+  </div>
+</div>
+
+<!-- Header with full-height image -->
+<header class="bgimg-1 w3-display-container w3-grayscale-min" id="home">
+  <div class="w3-display-left w3-text-white" style="padding:48px">
+    <span class="w3-jumbo w3-hide-small"><b>Mental Health Test</b></span><br>
+    <span class="w3-xxlarge w3-hide-large w3-hide-medium">Start something that matters</span><br>
+    <span class="w3-large">
+        Finding out if you are exhibiting signs of a mental health illness quickly and easily 
+        <br>through online screening.<br>
+    </span>
+    <p><a href="{{url_for('inputForm')}}" class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">
+    Take the test now</a>
+    
+
+  </div> 
+</header>
+
+<!-- About Section -->
+<div class="w3-container" style="padding:128px 16px" id="about">
+    <h3 class="w3-center">TYPES OF MENTAL HEALTH</h3>
+    <div class="w3-row-padding w3-center" style="margin-top:64px">
+      <div class="w3-quarter">
+        <img src="/static/anxiety.png" width="80" height="80">
+        <p class="w3-large">Anxiety</p>
+        <p>A conditions in which you have anxiety that does not go away and can get worse over time. 
+        The symptoms can interfere with daily activities such as job performance, schoolwork, and relationships.</p>
+      </div>
+      <div class="w3-quarter">
+        <img src="/static/depression.png" width="80" height="80">
+        <p class="w3-large">Depression</p>
+        <p>A mood disorder that causes a persistent feeling of sadness and loss of interest. Also called major depressive disorder or clinical depression, 
+        it affects how you feel, think and behave and can lead to a variety of emotional and physical problems.</p>
+      </div>
+      <div class="w3-quarter">
+        <img src="/static/loneliness.png" width="80" height="80">
+        <p class="w3-large">Loneliness</p>
+        <p>Distressing experience that occurs when a person’s social relationships are perceived by that person to be less in quantity, 
+            and especially in quality, than desired.</p>
+      </div>
+      <div class="w3-quarter">
+        <img src="/static/stress.png" width="80" height="80">
+        <p class="w3-large">Stress</p>
+        <p>Feeling of emotional or physical tension that can come from any event or thought that makes you feel frustrated, angry, or nervous
+        it is your body's reaction to a challenge or demand.</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Promo Section - "We know design" -->
+  <div class="w3-container w3-light-grey" style="padding:128px 16px">
+    <div class="w3-row-padding">
+      <div class="w3-col m6">
+        <h3>Mental Health & Wellness</h3>
+        <p>As soon as a mental disorder is identified, it needs to be treated in order to stop it from 
+            getting significantly worse. Early mental health diagnosis is related to a person's level 
+            of mental healthiness. Anyone exhibiting abnormal behaviour should get immediate  
+            treatment from a psychologist so they can be properly diagnosed with the type of 
+            mental illness they are experiencing. One-on-one interactions 
+            and therapy sessions can be used to accomplish this. The WHO highlighted that 
+            improper diagnosis and treatment particularly if it occurs at a late stage can result in a 
+            variety of illnesses. </p>       
+      </div>
+      <div class="w3-col m6">
+        <img class="w3-image w3-round-large" src="/static/background3.jpg" alt="Buildings" width="700" height="394">
+      </div>
+    </div>
+  </div>
+
+  <!-- Promo Section "Statistics" -->
+<div class="w3-container w3-row w3-center w3-dark-grey w3-padding-64">
+    This project was done in
+    fulfilment of the requirements
+    for Bachelor of Computer
+    Science (Hons.)
+    <br>College of Computing,
+    Informatics and Media, UiTM
+
+  </div>
+
+<!-- Footer -->
+<footer class="w3-center w3-black w3-padding-64">
+  <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a> 
+  <br><br>© Copyright 2023
+</footer>
+ 
+<script>
+// Modal Image Gallery
+function onClick(element) {
+  document.getElementById("img01").src = element.src;
+  document.getElementById("modal01").style.display = "block";
+  var captionText = document.getElementById("caption");
+  captionText.innerHTML = element.alt;
+}
+
+// Toggle between showing and hiding the sidebar when clicking the menu icon
+var mySidebar = document.getElementById("mySidebar");
+
+function w3_open() {
+  if (mySidebar.style.display === 'block') {
+    mySidebar.style.display = 'none';
+  } else {
+    mySidebar.style.display = 'block';
+  }
+}
+
+// Close the sidebar with the close button
+function w3_close() {
+    mySidebar.style.display = "none";
+}
+</script>
+</body>
+</html>

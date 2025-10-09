@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Mental Health Test</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="static/home.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+
+<!-- Navbar (sit on top) -->
+<div class="w3-top">
+  <div class="w3-bar w3-white w3-card" id="myNavbar">
+    <a href="/" class="w3-bar-item w3-button w3-wide">HOME</a>
+    <!-- Hide right-floated links on small screens and replace them with a menu icon -->
+    <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="w3_open()">
+      <i class="fa fa-bars"></i>
+    </a>
+  </div>
+</div>
+
+<!-- Header with full-height image -->
+<header class="bgimg-1 w3-display-container w3-grayscale-min" id="home">
+  <div class="w3-display-left w3-text-black" style="padding:48px">
+    <span class="w3-jumbo w3-hide-small"><b>Mental Health Test</b></span><br>   
+    <span class="w3-large">
+        Take our quick Mental Health test below<br>       
+    </span>
+    <br>
+    <span class="w3-large">
+      <!-- Output --> 
+      {% if anxiety %}
+      <div class="alert alert-primary" style="font-size:30px;"><b>{{anxiety}}</b></div>
+      {% elif depress %}
+      <div class="alert alert-primary" style="font-size:30px;"><b>{{depress}}</b></div>
+      {% elif lonely %}
+      <div class="alert alert-primary" style="font-size:30px;"><b>{{lonely}}</b></div>
+      {% elif stress %}
+      <div class="alert alert-primary" style="font-size:30px;"><b>{{stress}}</b></div>
+      {% elif normal %}
+      <div class="alert alert-primary" style="font-size:30px;"><b>{{normal}}</b></div>
+      {% endif %}       
+    </span>
+</div> 
+</header>
+
+    <form action="{{url_for('predict')}}" method="post">
+        Please note, all fields are required.<br>
+        <hr>
+        
+
+        <!--Input-->
+        <ol>
+            <label><b><li>I always getting nervous in a crowded environment</li></b></label>
+            <select name="nervous" required value="{{nervous}}">                
+                <option value="">Select</option>
+                <option value="1" {% if nervous == 1 %} selected{% endif %}>Often</option>
+                <option value="0" {% if nervous == 0 %} selected{% endif %}>Rarely</option>
+            </select>       
+
+            <label><b><li>I'm unable to control panic feelings</li></b></label>
+            <select name="panic" required value="{{panic}}">              
+                <option value="">Select</option>
+                <option value="1" {% if panic == 1 %} selected{% endif %}>Yes</option>
+                <option value="0" {% if panic == 0 %} selected{% endif %}>No</option>
+            </select> 
+                   
+            <label id="content2"><b><li>I feel trouble concentrating on simple things such as watching television or cooking</li></b></label>
+            <select name="concentrate" required value="{{concentrate}}">             
+                <option value="">Select</option>
+                <option value="1" {% if concentrate == 1 %} selected{% endif %}>Often</option>
+                <option value="0" {% if concentrate == 0 %} selected{% endif %}>Rarely</option>
+            </select>
+
+            <label id="content2"><b><li>Feeling negative, demotivated, or hopeless</li></b></label>
+            <select name="hope" required value="{{hope}}">              
+                <option value="">Select</option>
+                <option value="1" {% if hope == 1 %} selected{% endif %}>Often</option>
+                <option value="0" {% if hope == 0 %} selected{% endif %}>Rarely</option>
+            </select>
+
+            <label id="content2"><b><li>I've been irritable and easily angered</li></b></label>
+            <select name="anger" required value="{{anger}}">             
+                <option value="">Select</option>
+                <option value="1" {% if anger == 1 %} selected{% endif %}>Often</option>
+                <option value="0" {% if anger == 0 %} selected{% endif %}>Rarely</option>
+            </select>
+
+            <label id="content2"><b><li>I used social media for more than two hours</li></b></label>
+            <select name="social-media" required value="{{socialmed}}">              
+                <option value="">Select</option>
+                <option value="1" {% if socialmed == 1 %} selected{% endif %}>Yes</option>
+                <option value="0" {% if socialmed == 0 %} selected{% endif %}>No</option>
+            </select>
+
+            <label id="content2"><b><li>I'm putting on weight</li></b></label>
+            <select name="weight" required value="{{weight}}">
+                
+                <option value="">Select</option>
+                <option value="1" {% if weight == 1 %} selected{% endif %}>Yes</option>
+                <option value="0" {% if weight == 0 %} selected{% endif %}>No</option>
+            </select>
+
+            <label id="content2"><b><li>Having frequent nightmares</li></b></label>
+            <select name="nightmare" required value="{{nightmare}}">
+                
+                <option value="">Select</option>
+                <option value="1" {% if nightmare == 1 %} selected{% endif %}>Often</option>
+                <option value="0" {% if nightmare == 0 %} selected{% endif %}>Rarely</option>
+            </select>
+
+            <label id="content2"><b><li>Feeling negative with my decisions or with myself</li></b></label>
+            <select name="negative" required value="{{negative}}">
+              
+                <option value="">Select</option>
+                <option value="1" {% if negative == 1 %} selected{% endif %}>Often</option>
+                <option value="0" {% if negative == 0 %} selected{% endif %}>Rarely</option>
+            </select>
+
+            <label id="content2"><b><li>Feeling self-conscious and constantly blaming myself</li></b></label>
+            <select name="blaming" required value="{{blaming}}">
+                
+                <option value="">Select</option>
+                <option value="1" {% if blaming == 1 %} selected{% endif %}>Often</option>
+                <option value="0" {% if blaming == 0 %} selected{% endif %}>Rarely</option>
+            </select>
+
+            <div class="btn-block">
+                <button type="submit" href="/input">Done</button>
+                <button type="reset" href="">Clear</button>
+            </div>
+        </ol>
+    </form>
+
+ <!-- Footer -->
+<footer class="w3-center w3-black w3-padding-64">
+  <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a> 
+  <br><br>© Copyright 2023
+</footer> 
+
+ 
+<script>
+// Modal Image Gallery
+function onClick(element) {
+  document.getElementById("img01").src = element.src;
+  document.getElementById("modal01").style.display = "block";
+  var captionText = document.getElementById("caption");
+  captionText.innerHTML = element.alt;
+}
+
+// Toggle between showing and hiding the sidebar when clicking the menu icon
+var mySidebar = document.getElementById("mySidebar");
+
+function w3_open() {
+  if (mySidebar.style.display === 'block') {
+    mySidebar.style.display = 'none';
+  } else {
+    mySidebar.style.display = 'block';
+  }
+}
+
+// Close the sidebar with the close button
+function w3_close() {
+    mySidebar.style.display = "none";
+}
+</script>
+</body>
+</html>
