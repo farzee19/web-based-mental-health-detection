@@ -1,8 +1,12 @@
 from flask import Flask, render_template, request, redirect, url_for
 import numpy as np 
-import xgboost_model
+import joblib
 
 app = Flask(__name__)
+
+# Load the model and encoder ONCE at the top
+# Make sure model.pkl and encoder.pkl are in your GitHub folder
+my_model = joblib.load('model.pkl')
 
 @app.route('/')
 def home():
@@ -12,13 +16,13 @@ def home():
 def about():
     return render_template("about.html")
 
-#Set a post method to yield predictions on page
 @app.route('/home')  
 def inputForm():
      return render_template("home.html")
 
 @app.route('/input', methods = ['POST']) 
 def predict():
+    # Keep your original variables
     nervous = int(request.form['nervous'])
     panic = int(request.form['panic'])   
     concentrate = int(request.form['concentrate'])
@@ -29,12 +33,16 @@ def predict():
     nightmare = int(request.form['nightmare'])
     negative = int(request.form['negative'])
     blaming = int(request.form['blaming'])
-    y_pred = [[nervous, panic, concentrate, hope, anger, socialmed, weight, nightmare, negative, blaming]]
-
-    trained_model = xgboost_model.training_model()
-    prediction_value = trained_model.predict(y_pred)
     
-    if prediction_value == 0 :
+    # Prepare data for prediction
+    y_pred = np.array([[nervous, panic, concentrate, hope, anger, socialmed, weight, nightmare, negative, blaming]])
+
+    # Use the loaded model to predict the value
+    # We add [0] because predict returns a list
+    prediction_value = my_model.predict(y_pred)[0]
+    
+    # Keep your original IF/ELIF logic
+    if prediction_value == 0:
         return render_template('home.html', anxiety="Your result is you might have a symptom of Anxiety", nervous=nervous, panic=panic,
                                 concentrate=concentrate, hope=hope, anger=anger, socialmed=socialmed, weight=weight,
                                 nightmare=nightmare, negative=negative, blaming=blaming)
@@ -55,6 +63,5 @@ def predict():
                                 concentrate=concentrate, hope=hope, anger=anger, socialmed=socialmed, weight=weight,
                                 nightmare=nightmare, negative=negative, blaming=blaming) 
 
-#Run app
 if __name__ == "__main__":
     app.run(debug=True)
